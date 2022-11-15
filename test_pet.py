@@ -24,9 +24,30 @@ class TestIsAlive(unittest.TestCase):
 	def setUp(self):
 		self.fido = Pet("Fido")
 
-	def test_fitness_0_or_less(self):
+	def test_alive(self):
+		self.assertTrue(self.fido.is_alive())
+
+	def test_dead_due_to_unfitness(self):
 		self.fido.fitness = -2
+		self.fido.age = 10
+		self.fido.hunger = 2
 		self.assertFalse(self.fido.is_alive())
+
+	def test_dead_due_to_hunger(self):
+		self.fido.hunger = 12
+		self.fido.age = 10
+		self.fido.fitness = 8
+		self.assertFalse(self.fido.is_alive())
+
+	def test_dead_due_to_old_age(self):
+		self.fido.hunger = 2
+		self.fido.age = 32
+		self.fido.fitness = 8
+		self.assertFalse(self.fido.is_alive())
+
+
+
+
 
 # class TestGrowUp(unittest.TestCase):
 # 	def setUp(self):
