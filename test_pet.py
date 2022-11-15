@@ -1,6 +1,14 @@
 import unittest
 from pet import Pet
 
+HUNGER_INCREMENT = 5
+HUNGER_DECREMENT = 3
+FITNESS_INCREMENT = 4
+FITNESS_DECREMENT = 3
+
+MAXIMUM_HUNGER = 10
+MAXIMUM_FITNESS = 10
+MAXIMUM_AGE = 30
 
 class TestPet(unittest.TestCase):
 	def setUp(self):
@@ -46,14 +54,22 @@ class TestIsAlive(unittest.TestCase):
 		self.assertFalse(self.fido.is_alive())
 
 
+class TestGrowUp(unittest.TestCase):
+	def setUp(self):
+		self.fido = Pet("Fido")
+		self.fido.grow_up()
 
+	def test_age_by_1(self):
+		self.assertEqual(self.fido.age, 1)
 
+	def test_increase_hunger_by_5(self):
+		self.assertEqual(self.fido.hunger, 5)
 
-# class TestGrowUp(unittest.TestCase):
-# 	def setUp(self):
-# 		self.fido = Pet("Fido")
-#
-# 	def test_increase_age(self):
+	def test_throw_error_when_dead(self):
+		self.fido.age = MAXIMUM_AGE
+		with self.assertRaises(Exception):
+			self.fido.grow_up()
+
 
 
 if __name__ == '__main__':
